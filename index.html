@@ -71,19 +71,22 @@
         /* --- 2. PRICE CONTAINER --- */
         /* This is the main white/transparent box */
         .container {
-            position: relative; /* Normal positioning */
-            width: 90%;         /* Container width (90% of the screen width) */
-            max-width: 500px;   /* Maximum width it can grow to (on large screens) */
-            
-            /* --- MODIFICATION 2: CENTERING --- */
-            margin: 0 auto; /* '0' for top/bottom, 'auto' for left/right (works with flex center) */
-            /* You could use 'margin: 20px auto;' to add 20px space top and bottom */
+            position: relative; 
+            width: 90%;         
+            max-width: 500px;   
+            margin: 0 auto; 
             
             background-color: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+            
+            /* --- ADD THESE LINES FOR BLUR --- */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            /* --------------------------------- */
+
             border-radius: 20px; /* Rounded corners */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Drop shadow for depth */
-            padding: 20px; /* Inner spacing (space between content and container edge) */
-            box-sizing: border-box; /* Includes padding in the total width/height */
+            padding: 20px; 
+            box-sizing: border-box; 
         }
 
         /* --- TAB NAVIGATION --- */
@@ -615,4 +618,5 @@
 
 </body>
 </html>
+
 
