@@ -515,8 +515,8 @@
                 
                 // Populate Silver (Latest and Previous)
                 // These IDs exist in the SJ-V HTML, so this works
-                document.getElementById('silver_latest').value = format(data.silver_latest);
-                document.getElementById('silver_previous').value = format(data.silver_previous);
+                document.getElementById('silver_latest').value = format(data.latest_silver);
+                document.getElementById('silver_previous').value = format(data.previous_silver);
 
                 // 5. Update the "up/down" indicators
                 updateIndicators();
@@ -571,3 +571,4 @@
 
 </body>
 </html>
+
