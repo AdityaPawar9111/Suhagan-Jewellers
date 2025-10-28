@@ -4,52 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suhagan Jewellers</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset default margin and padding */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden; /* Prevents scrolling */
+            /* Use the clean Noto Sans font, with Tiro Devanagari for Hindi text */
+            font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
         }
 
         body {
-            /* 1. Set the background image */
-            background-image: url('MAIN.png');
-
-            /* 2. Make the image cover the entire screen */
+            /* --- IMPORTANT --- */
+            /* Make sure this filename matches your image: 'MAIN.png' or 'MAIN.jpg' */
+            background-image: url('MAIN.png'); 
+            
             background-size: cover;
-
-            /* 3. Center the image */
             background-position: center;
-
-            /* 4. Prevent the image from repeating */
             background-repeat: no-repeat;
-
-            /* 5. Ensure the body fills the entire viewport */
             width: 100vw;
             height: 100vh;
             
-            /* This will be the container for future text */
+            /* This relative position is needed for the absolute footer */
             position: relative;
         }
 
-        /* You can add text boxes later.
-           For example:
-           .footer {
-                position: absolute;
-                bottom: 20px;
-                left: 0;
-                width: 100%;
-                color: white;
-                text-align: center;
-           }
-        */
+        /* This container holds your text and sticks it to the bottom */
+        .footer-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding doesn't add to width */
+            
+            /* Adds spacing from the bottom edge */
+            padding: 15px 10px 25px 10px; 
+            
+            /* Text styling */
+            color: #f0f0f0; /* A soft, easy-to-read white */
+            text-align: center;
+            
+            /* Adds a subtle shadow to make the text pop */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            
+            /* Adds a subtle dark fade at the bottom to ensure text is readable */
+            background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
+        }
+
+        .charges-text {
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0 0 10px 0; /* Adds space below this line */
+        }
+        
+        .address-text {
+            font-size: 16px;
+            font-weight: 700; /* Bolder */
+            margin: 0;
+            line-height: 1.4; /* Better spacing for text with emojis */
+        }
 
     </style>
 </head>
 <body>
-    
-    </body>
+
+    <div class="footer-container">
+        
+        <p class="charges-text">
+            Making charges and 3% GST applicable.
+        </p>
+        
+        <p class="address-text">
+            सुहागन ज्वैलर्स, 📍 मंगलवारा बाजार, मैंन मार्केट, पिपरिया 📞9752102126
+        </p>
+
+    </div>
+
+</body>
 </html>
