@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suhagan Jewellers</title>
+    <title>SUHAGAN JEWELLERS - Live Gold & Silver Rates</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --text-light: #f0e6d2;
+            --text-dark: #3b0000;
+            --accent-gold: #C0952D;
+            --bg-dark: #3b0000;
+            --bg-medium: #5d0000;
+            --bg-light: #8a0000;
+            --up-green: #28a745;
+            --down-red: #e53935;
+        }
+
+        /* --- 1. FULL SCREEN BACKGROUND --- */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden; /* Prevents scrolling */
-            /* Use the clean Noto Sans font, with Tiro Devanagari for Hindi text */
-            font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
         }
-
+        
         body {
+            font-family: 'Montserrat', sans-serif;
+            
             /* --- IMPORTANT --- */
             /* Make sure this filename matches your image: 'MAIN.png' or 'MAIN.jpg' */
-            background-image: url('MAIN.png'); 
+            background-image: url('MAIN.png');
             
             background-size: cover;
             background-position: center;
@@ -31,60 +43,519 @@
             width: 100vw;
             height: 100vh;
             
-            /* This relative position is needed for the absolute footer */
+            /* This relative position is needed for the absolute children */
             position: relative;
+            color: var(--text-light);
         }
 
-        /* This container holds your text and sticks it to the bottom */
-        .footer-container {
+        /* --- 2. PRICE CONTAINER (from SJ-II.html) --- */
+        /* Adapted to float over the background image */
+        .container {
+            position: absolute;
+            width: 90%; /* Takes 90% of screen width */
+            
+            /* Positioned between half-way and the footer */
+            bottom: 100px; 
+            
+            left: 50%;
+            transform: translateX(-50%);
+            
+            background: transparent;
+            overflow: hidden;
+            border: none;
+            
+            /* Added for better appearance on the image */
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: rgba(59, 0, 0, 0.2); /* Faint dark background for readability */
+            backdrop-filter: blur(2px); /* Blurs the image slightly behind the prices */
+            border-radius: 10px;
+        }
+
+        /* --- STYLES COPIED FROM SJ-II.html --- */
+        /* (Header is removed as logo is on the background) */
+
+        .tab {
+            display: flex;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(240, 230, 210, 0.2);
+            justify-content: center;
+        }
+        
+        .hamburger-button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+            border-right: 1px solid rgba(240, 230, 210, 0.2);
+            flex-shrink: 0;
+        }
+
+        .hamburger-button:hover { background-color: rgba(0,0,0,0.1); }
+        .hamburger-button .bar { width: 25px; height: 3px; background-color: var(--text-light); border-radius: 2px; }
+        
+        .tab button.tablinks {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 16px 15px; /* Slightly reduced padding for mobile */
+            transition: all 0.4s ease;
+            font-size: 14px; /* Slightly reduced font for mobile */
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            color: rgba(240, 230, 210, 0.6);
+            flex-grow: 1;
+            border-bottom: 4px solid transparent;
+            text-align: center;
+        }
+
+        .tab button.tablinks:hover {
+            background-color: rgba(0,0,0,0.1);
+            color: var(--text-light);
+        }
+        .tab button.tablinks.active {
+            color: var(--text-light);
+            border-bottom: 4px solid var(--accent-gold);
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 25px 5px; /* Reduced padding for mobile */
+            animation: fadeIn 0.6s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em; /* Reduced size */
+            color: var(--text-light);
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 20px; /* Reduced gap */
+        }
+
+        .price-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-item label {
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 0.9em; /* Reduced size */
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .price-item input[readonly] {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(240, 230, 210, 0.3);
+            padding: 8px 0; /* Reduced padding */
+            font-size: 1.1em; /* Reduced size */
+            font-weight: 700;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+        }
+
+        .price-value-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Reduced gap */
+        }
+        .price-value-wrapper input[readonly] {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .price-item.static-item label {
+            font-size: 0.85em; /* Reduced size */
+            color: rgba(240, 230, 210, 0.8);
+            margin-top: 10px; /* Adjusted margin */
+        }
+        
+        .price-indicator {
+            font-weight: 700;
+            font-size: 0.9em; /* Reduced size */
+            white-space: nowrap;
+        }
+        .up { color: var(--up-green); }
+        .down { color: var(--down-red); }
+        .neutral { color: #aaa; }
+
+        /* --- 3. RESIZED FOOTER --- */
+        /* This style floats at the very bottom of the screen */
+        footer {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            box-sizing: border-box; /* Ensures padding doesn't add to width */
+            box-sizing: border-box;
             
-            /* Adds spacing from the bottom edge */
-            padding: 15px 10px 25px 10px; 
+            /* Reduced padding to make it smaller */
+            padding: 10px 10px 20px 10px; 
             
-            /* Text styling */
-            color: #f0f0f0; /* A soft, easy-to-read white */
+            color: #f0f0f0;
             text-align: center;
-            
-            /* Adds a subtle shadow to make the text pop */
+            font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            
-            /* Adds a subtle dark fade at the bottom to ensure text is readable */
             background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
         }
 
         .charges-text {
-            font-size: 14px;
+            /* Reduced font size */
+            font-size: 12px; 
             font-weight: 400;
-            margin: 0 0 10px 0; /* Adds space below this line */
+            margin: 0 0 8px 0; /* Reduced space below */
         }
         
         .address-text {
-            font-size: 16px;
-            font-weight: 700; /* Bolder */
+            /* Reduced font size */
+            font-size: 14px; 
+            font-weight: 700;
             margin: 0;
-            line-height: 1.4; /* Better spacing for text with emojis */
+            line-height: 1.4;
+        }
+        
+        /* --- 4. MODAL STYLING (from SJ-II.html) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: var(--bg-medium);
+            border: 1px solid var(--accent-gold);
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+            color: var(--text-light);
+        }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .modal-content h3 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+        .modal-content .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            gap: 8px;
+        }
+        .modal-content .input-group label {
+            width: auto;
+            text-align: left;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+        .modal-content .input-group input {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(0,0,0,0.2);
+            border: 1px solid rgba(240, 230, 210, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-light);
         }
 
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+        .modal-buttons .cancel-btn {
+            background-color: #777;
+            color: var(--text-light);
+        }
+        .modal-buttons .cancel-btn:hover { background-color: #999; }
+        .modal-buttons .update-btn {
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+        }
+        .modal-buttons .update-btn:hover { background-color: #dab654; }
     </style>
 </head>
 <body>
+    
+    <div class="container">
+        <div class="tab">
+            <button class="hamburger-button" onclick="openUpdatePopup()"><div class="bar"></div><div class="bar"></div><div class="bar"></div></button>
+            <button class="tablinks" onclick="openTab(event, 'latest')" id="defaultOpen">Latest Prices</button>
+            <button class="tablinks" onclick="openTab(event, 'previous')">Previous Prices</button>
+        </div>
 
-    <div class="footer-container">
+        <div id="latest" class="tabcontent">
+            <div class="price-grid">
+                <div class="price-item">
+                    <label for="kt24">GOLD - 24 KT:</label>
+                    <div class="price-value-wrapper">
+                        <input type="text" id="kt24" readonly>
+                        <span id="indicator_24" class="price-indicator"></span>
+                    </div>
+                </div>
+                <div class="price-item">
+                    <label for="kt22">GOLD - 22 KT:</label>
+                    <div class="price-value-wrapper">
+                        <input type="text" id="kt22" readonly>
+                        <span id="indicator_22" class="price-indicator"></span>
+                    </div>
+                </div>
+                <div class="price-item">
+                    <label for="kt20">GOLD - 20 KT:</label>
+                    <div class="price-value-wrapper">
+                        <input type="text" id="kt20" readonly>
+                        <span id="indicator_20" class="price-indicator"></span>
+                    </div>
+                </div>
+                <div class="price-item">
+                    <label for="kt18">GOLD - 18 KT:</label>
+                    <div class="price-value-wrapper">
+                        <input type="text" id="kt18" readonly>
+                        <span id="indicator_18" class="price-indicator"></span>
+                    </div>
+                </div>
+                <div class="price-item">
+                    <label for="silver_latest">SILVER - FINE:</label>
+                    <div class="price-value-wrapper">
+                        <input type="text" id="silver_latest" readonly>
+                        <span id="silver_indicator" class="price-indicator"></span>
+                    </div>
+                </div>
+                <div class="price-item static-item">
+                    <label>+ 3% charges and GST</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="previous" class="tabcontent">
+            <h3>PREVIOUS PRICES</h3>
+            <div class="price-grid">
+                 <div class="price-item">
+                    <label for="previous_kt24">GOLD - 24 KT:</label>
+                    <input type="text" id="previous_kt24" readonly>
+                 </div>
+                 <div class="price-item">
+                    <label for="previous_kt22">GOLD - 22 KT:</label>
+                    <input type="text" id="previous_kt22" readonly>
+                 </div>
+                 <div class="price-item">
+                    <label for="previous_kt20">GOLD - 20 KT:</label>
+                    <input type="text" id="previous_kt20" readonly>
+                 </div>
+                 <div class="price-item">
+                    <label for="previous_kt18">GOLD - 18 KT:</label>
+                    <input type="text" id="previous_kt18" readonly>
+                 </div>
+                 <div class="price-item">
+                    <label for="silver_previous">SILVER - FINE:</label>
+                    <input type="text" id="silver_previous" readonly>
+                 </div>
+            </div>
+        </div>
         
+    </div>
+
+    <footer>
         <p class="charges-text">
             Making charges and 3% GST applicable.
         </p>
-        
         <p class="address-text">
             सुहागन ज्वैलर्स, 📍 मंगलवारा बाजार, मैंन मार्केट, पिपरिया 📞9752102126
         </p>
-
+    </footer>
+    
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <h3>Update Latest Prices</h3>
+            <div class="input-group">
+                <label for="modal_gold_price">Latest 24 Kt Gold Price:</label>
+                <input type="number" id="modal_gold_price" placeholder="Enter 24 Kt Gold rate">
+            </div>
+            <div class="input-group">
+                <label for="modal_silver_price">Latest Fine Silver Price:</label>
+                <input type="number" id="modal_silver_price" placeholder="Enter Fine Silver rate">
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeUpdatePopup()">Cancel</button>
+                <button class="update-btn" onclick="applyUpdatedPrices()">Update</button>
+            </div>
+        </div>
     </div>
 
+    <script>
+        // --- IMPORTANT: Paste your Google Apps Script URL here ---
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0uIvDhU6t2mEsGFXKGinpFogFY8UAxWzk6sNmLWHPH3uPHaVEDwwnB0lntqsF4gI1/exec';
+
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        function calculateGoldPrices(sourceId, kt22Id, kt20Id, kt18Id) {
+            const sourceRate = parseFloat(document.getElementById(sourceId).value.replace('₹ ', '')); // Clean '₹ '
+            const input22kt = document.getElementById(kt22Id), input20kt = document.getElementById(kt20Id), input18kt = document.getElementById(kt18Id);
+            if (!isNaN(sourceRate) && sourceRate > 0) {
+                input22kt.value = `₹ ${(sourceRate * 0.916).toFixed(2)}`;
+                input20kt.value = `₹ ${(sourceRate * 0.835).toFixed(2)}`;
+                input18kt.value = `₹ ${(sourceRate * 0.760).toFixed(2)}`;
+            } else { input22kt.value = ''; input20kt.value = ''; input18kt.value = ''; }
+        }
+        
+        function updateGoldIndicators() {
+            const pairs = [
+                { latest: 'kt24', previous: 'previous_kt24', indicator: 'indicator_24' }, { latest: 'kt22', previous: 'previous_kt22', indicator: 'indicator_22' },
+                { latest: 'kt20', previous: 'previous_kt20', indicator: 'indicator_20' }, { latest: 'kt18', previous: 'previous_kt18', indicator: 'indicator_18' }
+            ];
+            pairs.forEach(p => {
+                const latest = parseFloat(document.getElementById(p.latest).value.replace('₹ ', '')), previous = parseFloat(document.getElementById(p.previous).value.replace('₹ ', ''));
+                const ind = document.getElementById(p.indicator);
+                if (!isNaN(latest) && !isNaN(previous)) {
+                    const diff = latest - previous;
+                    if (diff > 0) { ind.innerHTML = `(+${diff.toFixed(2)} ▲)`; ind.className = 'price-indicator up'; }
+                    else if (diff < 0) { ind.innerHTML = `(${diff.toFixed(2)} ▼)`; ind.className = 'price-indicator down'; }
+                    else { ind.textContent = '(-)'; ind.className = 'price-indicator neutral'; }
+                } else { ind.textContent = ''; }
+            });
+        }
+
+        function updateSilverIndicator() {
+            const latest = parseFloat(document.getElementById('silver_latest').value.replace('₹ ', '')), previous = parseFloat(document.getElementById('silver_previous').value.replace('₹ ', ''));
+            const ind = document.getElementById('silver_indicator');
+            if (!isNaN(latest) && !isNaN(previous)) {
+                const diff = latest - previous;
+                if (diff > 0) { ind.innerHTML = `(+${diff.toFixed(2)} ▲)`; ind.className = 'price-indicator up'; }
+                else if (diff < 0) { ind.innerHTML = `(${diff.toFixed(2)} ▼)`; ind.className = 'price-indicator down'; }
+                else { ind.textContent = '(-)'; ind.className = 'price-indicator neutral'; }
+            } else { ind.textContent = ''; }
+        }
+
+        function updateAllCalculations() {
+            calculateGoldPrices('kt24', 'kt22', 'kt20', 'kt18');
+            calculateGoldPrices('previous_kt24', 'previous_kt22', 'previous_kt20', 'previous_kt18');
+            updateGoldIndicators();
+            updateSilverIndicator();
+        }
+        
+        function openUpdatePopup() {
+            document.getElementById('updateModal').style.display = 'flex';
+        }
+
+        function closeUpdatePopup() { 
+            document.getElementById('updateModal').style.display = 'none'; 
+            document.getElementById('modal_gold_price').value = '';
+            document.getElementById('modal_silver_price').value = '';
+        }
+
+        function applyUpdatedPrices() {
+            const currentLatestGold = document.getElementById('kt24').value;
+            const currentLatestSilver = document.getElementById('silver_latest').value;
+
+            const newGoldPrice = document.getElementById('modal_gold_price').value;
+            const newSilverPrice = document.getElementById('modal_silver_price').value;
+
+            if (newGoldPrice) {
+                // Set previous price from current, then update current
+                document.getElementById('previous_kt24').value = currentLatestGold.replace('₹ ', '');
+                document.getElementById('kt24').value = `₹ ${parseFloat(newGoldPrice).toFixed(2)}`;
+            }
+            if (newSilverPrice) {
+                // Set previous price from current, then update current
+                document.getElementById('silver_previous').value = currentLatestSilver.replace('₹ ', '');
+                document.getElementById('silver_latest').value = `₹ ${parseFloat(newSilverPrice).toFixed(2)}`;
+            }
+            
+            updateAllCalculations();
+            savePricesToSheet();
+            closeUpdatePopup();
+        }
+
+        async function fetchPricesFromSheet() {
+            try {
+                const response = await fetch(APPS_SCRIPT_URL);
+                if (!response.ok) { throw new Error('Network response was not ok'); }
+                const data = await response.json();
+                
+                // Set values from sheet, formatting them as currency
+                document.getElementById('kt24').value = data.latestGold ? `₹ ${parseFloat(data.latestGold).toFixed(2)}` : '';
+                document.getElementById('previous_kt24').value = data.previousGold ? `₹ ${parseFloat(data.previousGold).toFixed(2)}` : '';
+                document.getElementById('silver_latest').value = data.latestSilver ? `₹ ${parseFloat(data.latestSilver).toFixed(2)}` : '';
+                document.getElementById('silver_previous').value = data.previousSilver ? `₹ ${parseFloat(data.previousSilver).toFixed(2)}` : '';
+
+                updateAllCalculations();
+            } catch (error) {
+                console.error("Error fetching data from Google Sheet:", error);
+            }
+        }
+
+        async function savePricesToSheet() {
+            // Send raw numbers, not formatted currency
+            const dataToSave = {
+                latestGold: document.getElementById('kt24').value.replace('₹ ', ''),
+                previousGold: document.getElementById('previous_kt24').value.replace('₹ ', ''),
+                latestSilver: document.getElementById('silver_latest').value.replace('₹ ', ''),
+                previousSilver: document.getElementById('silver_previous').value.replace('₹ ', '')
+            };
+
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(dataToSave)
+                });
+            } catch (error) {
+                console.error("Error saving data to Google Sheet:", error);
+            }
+        }
+        
+        window.onload = function() {
+            document.getElementById("defaultOpen").click();
+            fetchPricesFromSheet();
+        };
+    </script>
 </body>
 </html>
