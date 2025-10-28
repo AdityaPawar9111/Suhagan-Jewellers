@@ -19,7 +19,7 @@
             --bg-dark: #3b0000;
             --bg-medium: #5d0000;
             --bg-light: #8a0000;
-            --up-green: #28a745;   /* Color for price increase */
+            --up-green: #28a745;    /* Color for price increase */
             --down-red: #e53935; /* Color for price decrease */
         }
 
@@ -60,8 +60,8 @@
             
             /* --- MODIFICATION 1: CENTERING --- */
             /* These 3 lines center the direct child (the .container) */
-            display: flex;           /* Use flexbox for layout */
-            align-items: center;     /* Centers child vertically */
+            display: flex;          /* Use flexbox for layout */
+            align-items: center;    /* Centers child vertically */
             justify-content: center; /* Centers child horizontally */
             
             position: relative; /* Needed for absolutely positioned children (like the footer) */
@@ -111,10 +111,10 @@
         }
 
         .hamburger-button:hover { background-color: rgba(0,0,0,0.1); }
-        .hamburger-button .bar { 
+        .hamburger-button .bar {    
             width: 25px;  /* Width of each bar */
             height: 3px; /* Height of each bar */
-            background-color: var(--text-light); 
+            background-color: var(--text-light);    
             border-radius: 2px; 
         }
         
@@ -164,7 +164,8 @@
 
         .price-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Creates a 2-column grid */
+            /* --- MODIFICATION 3: Changed from '1fr 1fr' to '1fr' --- */
+            grid-template-columns: 1fr; /* Creates a 1-column grid */
             gap: 20px 20px; /* 20px space vertically, 20px space horizontally */
         }
 
@@ -229,13 +230,13 @@
         }
 
         .charges-text {
-            font-size: 14px; 
+            font-size: 14px;    
             font-weight: 200;
             margin: 0 0 15px 0; /* 15px space below this text */
         }
         
         .address-text {
-            font-size: 14px; 
+            font-size: 14px;    
             font-weight: 400;
             margin: -2px; /* Adjusts positioning */
             line-height: 1.0; /* Adjusts line spacing */
@@ -243,8 +244,8 @@
         
         /* --- 4. MODAL STYLING (POPUP) --- */
         .modal {
-            display: none;    /* Hidden by default */
-            position: fixed;  /* Covers the whole screen */
+            display: none;     /* Hidden by default */
+            position: fixed;   /* Covers the whole screen */
             z-index: 100;   /* Sits on top of everything (except footer) */
             left: 0;
             top: 0;
@@ -286,8 +287,8 @@
             font-size: 1em;
         }
         .modal-content .input-group input {
-            width: 100%;      /* Input field fills the width */
-            padding: 14px;    /* Inner spacing of the input field */
+            width: 100%;     /* Input field fills the width */
+            padding: 14px;   /* Inner spacing of the input field */
             background-color: rgba(0,0,0,0.2);
             border: 1px solid rgba(240, 230, 210, 0.3);
             border-radius: 8px;
@@ -339,8 +340,7 @@
         <div class="tab">
             <button class="hamburger-button" onclick="openUpdatePopup()"><div class="bar"></div><div class="bar"></div><div class="bar"></div></button>
             <button class="tablinks" onclick="openTab(event, 'latest')" id="defaultOpen">Latest Prices</button>
-            <button class="tablinks" onclick="openTab(event, 'previous')">Previous Prices</button>
-        </div>
+            </div>
 
         <div id="latest" class="tabcontent">
             <div class="price-grid">
@@ -465,9 +465,9 @@
             // Shows the modal by changing its display from 'none' to 'flex'
             document.getElementById('updateModal').style.display = 'flex';
         }
-        function closeUpdatePopup() { 
+        function closeUpdatePopup() {    
             // Hides the modal
-            document.getElementById('updateModal').style.display = 'none'; 
+            document.getElementById('updateModal').style.display = 'none';    
             // Clears the input fields for next time
             document.getElementById('modal_gold_price').value = '';
             document.getElementById('modal_silver_price').value = '';
@@ -496,7 +496,7 @@
                 await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ 
+                    body: JSON.stringify({    
                         gold: newGoldPrice || null, // Send new price, or null if empty
                         silver: newSilverPrice || null
                     })
@@ -533,7 +533,7 @@
                 document.getElementById('kt18').value = format(data.latest_18);
                 document.getElementById('silver_latest').value = format(data.latest_silver);
                 
-                // Populate all "Previous" fields
+                // Populate all "Previous" fields (these are necessary for the indicators)
                 document.getElementById('previous_kt24').value = format(data.previous_24);
                 document.getElementById('previous_kt22').value = format(data.previous_22);
                 document.getElementById('previous_kt20').value = format(data.previous_20);
@@ -567,16 +567,16 @@
                 if (!isNaN(latest) && !isNaN(previous)) {
                     const diff = latest - previous;
                     if (diff > 0) { // Price went up
-                        ind.innerHTML = `(+${diff.toFixed(2)} ▲)`; 
+                        ind.innerHTML = `(+${diff.toFixed(2)} ▲)`;    
                         ind.className = 'price-indicator up'; // Make it green
                     } else if (diff < 0) { // Price went down
-                        ind.innerHTML = `(${diff.toFixed(2)} ▼)`; 
+                        ind.innerHTML = `(${diff.toFixed(2)} ▼)`;    
                         ind.className = 'price-indicator down'; // Make it red
                     } else { // No change
-                        ind.textContent = '(-)'; 
+                        ind.textContent = '(-)';    
                         ind.className = 'price-indicator neutral'; // Make it grey
                     }
-                } else { 
+                } else {    
                     ind.textContent = ''; // Clear if no data
                 }
             });
@@ -588,18 +588,18 @@
 
             if (!isNaN(latestSilver) && !isNaN(previousSilver)) {
                 const diff = latestSilver - previousSilver;
-                if (diff > 0) { 
-                    silverInd.innerHTML = `(+${diff.toFixed(2)} ▲)`; 
-                    silverInd.className = 'price-indicator up'; 
-                } else if (diff < 0) { 
-                    silverInd.innerHTML = `(${diff.toFixed(2)} ▼)`; 
-                    silverInd.className = 'price-indicator down'; 
-                } else { 
-                    silverInd.textContent = '(-)'; 
-                    silverInd.className = 'price-indicator neutral'; 
+                if (diff > 0) {    
+                    silverInd.innerHTML = `(+${diff.toFixed(2)} ▲)`;    
+                    silverInd.className = 'price-indicator up';    
+                } else if (diff < 0) {    
+                    silverInd.innerHTML = `(${diff.toFixed(2)} ▼)`;    
+                    silverInd.className = 'price-indicator down';    
+                } else {    
+                    silverInd.textContent = '(-)';    
+                    silverInd.className = 'price-indicator neutral';    
                 }
-            } else { 
-                silverInd.textContent = ''; 
+            } else {    
+                silverInd.textContent = '';    
             }
         }
         
@@ -609,7 +609,7 @@
             // Clicks the "Latest Prices" tab by default
             document.getElementById("defaultOpen").click();
             // Fetches prices from Google Sheet as soon as page loads
-            fetchPricesFromSheet(); 
+            fetchPricesFromSheet();    
         };
     </script>
 
