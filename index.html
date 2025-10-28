@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
     
     <style>
+        /* --- Root Variables --- */
+        /* Define your color palette here for easy editing */
         :root {
             --text-light: #f0e6d2;
             --text-dark: #3b0000;
@@ -17,72 +19,79 @@
             --bg-dark: #3b0000;
             --bg-medium: #5d0000;
             --bg-light: #8a0000;
-            --up-green: #28a745;
-            --down-red: #e53935;
+            --up-green: #28a745;   /* Color for price increase */
+            --down-red: #e53935; /* Color for price decrease */
         }
 
-        /* --- 1. FULL SCREEN BACKGROUND --- */
+        /* --- 1. FULL SCREEN BACKGROUND & RESET --- */
         html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto; /* allow scrolling */
-  background: linear-gradient(to bottom, #720000, #400000);
-}
+            margin: 0;  /* Remove default browser margin */
+            padding: 0; /* Remove default browser padding */
+            width: 100%; /* Ensure it spans the full width */
+            min-height: 100vh; /* Make it at least the full viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling if content is tall */
+            background: linear-gradient(to bottom, #720000, #400000); /* Background gradient */
+        }
 
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: calc(100vh - 120px); /* ensures content fits above footer */
-  padding-top: 60px; /* moves everything slightly down */
-  box-sizing: border-box;
-}
+        /* This 'main' rule is in your original code but not used by the current HTML structure. */
+        /* If you wrap your .container in <main>, these rules will apply. */
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns content to the top */
+            align-items: center;       /* Aligns content to the center horizontally */
+            min-height: calc(100vh - 120px); /* Example: full height minus footer height */
+            padding-top: 60px; /* Adds spacing from the top */
+            box-sizing: border-box;
+        }
 
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Montserrat', sans-serif; /* Default font for the page */
             
-            /* --- IMPORTANT --- */
-            /* Make sure this filename matches your image: 'MAIN.png' or 'MAIN.jpg' */
+            /* --- Background Image --- */
+            /* Replace 'MAIN.png' with your image filename */
             background-image: url('MAIN.png');
+            background-size: cover;   /* Stretches image to cover the whole screen */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents image from tiling */
+            width: 100vw; /* Force body to be 100% of viewport width */
             
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 100vw;
-            height: 100vh;
+            /* --- MODIFICATION 1: CENTERING --- */
+            /* These 3 lines center the direct child (the .container) */
+            display: flex;           /* Use flexbox for layout */
+            align-items: center;     /* Centers child vertically */
+            justify-content: center; /* Centers child horizontally */
             
-            /* This relative position is needed for the absolute children */
-            position: relative;
-            color: var(--text-light);
+            position: relative; /* Needed for absolutely positioned children (like the footer) */
+            color: var(--text-light); /* Default text color */
         }
 
         /* --- 2. PRICE CONTAINER --- */
-        /* This is the floating box style from SJ-V.html */
+        /* This is the main white/transparent box */
         .container {
-  position: relative;
-  width: 90%;
-  max-width: 500px;
-  margin: 120px auto 100px; /* smaller and centered spacing */
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  box-sizing: border-box;
-}
+            position: relative; /* Normal positioning */
+            width: 90%;         /* Container width (90% of the screen width) */
+            max-width: 500px;   /* Maximum width it can grow to (on large screens) */
+            
+            /* --- MODIFICATION 2: CENTERING --- */
+            margin: 0 auto; /* '0' for top/bottom, 'auto' for left/right (works with flex center) */
+            /* You could use 'margin: 20px auto;' to add 20px space top and bottom */
+            
+            background-color: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Drop shadow for depth */
+            padding: 20px; /* Inner spacing (space between content and container edge) */
+            box-sizing: border-box; /* Includes padding in the total width/height */
+        }
 
-
-
-        /* --- STYLES FOR TABS, GRIDS, ETC. FROM SJ-V.html --- */
+        /* --- TAB NAVIGATION --- */
         .tab {
-            display: flex;
+            display: flex; /* Aligns children (buttons) in a row */
             background-color: transparent;
-            border-bottom: 1px solid rgba(240, 230, 210, 0.2);
-            justify-content: center;
+            border-bottom: 1px solid rgba(240, 230, 210, 0.2); /* Line under the tabs */
+            justify-content: center; /* Center-aligns the buttons */
         }
         
         .hamburger-button {
@@ -90,33 +99,38 @@ main {
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 0 20px;
+            padding: 0 20px; /* Space on the left/right of the icon */
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
+            flex-direction: column; /* Stacks the bars vertically */
+            justify-content: center; /* Centers bars vertically */
+            align-items: center; /* Centers bars horizontally */
+            gap: 5px; /* Space *between* the bars */
             transition: background-color 0.3s ease;
-            border-right: 1px solid rgba(240, 230, 210, 0.2);
-            flex-shrink: 0;
+            border-right: 1px solid rgba(240, 230, 210, 0.2); /* Separator line */
+            flex-shrink: 0; /* Prevents button from shrinking */
         }
 
         .hamburger-button:hover { background-color: rgba(0,0,0,0.1); }
-        .hamburger-button .bar { width: 25px; height: 3px; background-color: var(--text-light); border-radius: 2px; }
+        .hamburger-button .bar { 
+            width: 25px;  /* Width of each bar */
+            height: 3px; /* Height of each bar */
+            background-color: var(--text-light); 
+            border-radius: 2px; 
+        }
         
         .tab button.tablinks {
             background-color: transparent;
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 16px 15px;
+            padding: 16px 15px; /* Vertical (16px) and Horizontal (15px) spacing inside button */
             transition: all 0.4s ease;
             font-size: 14px;
             font-weight: 500;
             font-family: 'Montserrat', sans-serif;
             color: rgba(240, 230, 210, 0.6);
-            flex-grow: 1;
-            border-bottom: 4px solid transparent;
+            flex-grow: 1; /* Allows buttons to share and fill remaining space */
+            border-bottom: 4px solid transparent; /* "Empty" space for the active underline */
             text-align: center;
         }
 
@@ -126,22 +140,23 @@ main {
         }
         .tab button.tablinks.active {
             color: var(--text-light);
-            border-bottom: 4px solid var(--accent-gold);
+            border-bottom: 4px solid var(--accent-gold); /* Active tab underline */
         }
 
+        /* --- TAB CONTENT (PRICE GRIDS) --- */
         .tabcontent {
-            display: none;
-            padding: 25px 5px;
+            display: none; /* Hidden by default, shown by JavaScript */
+            padding: 25px 5px; /* Top/Bottom (25px) and Left/Right (5px) spacing */
             animation: fadeIn 0.6s;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8em;
+            font-size: 1.8em; /* Title font size */
             color: var(--text-light);
-            margin-top: 0;
-            margin-bottom: 25px;
+            margin-top: 0;      /* Space above the title */
+            margin-bottom: 25px; /* Space below the title */
             text-align: center;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -149,115 +164,105 @@ main {
 
         .price-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px 20px;
+            grid-template-columns: 1fr 1fr; /* Creates a 2-column grid */
+            gap: 20px 20px; /* 20px space vertically, 20px space horizontally */
         }
 
         .price-item {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stacks label and input vertically */
         }
         
         .price-item label {
             font-weight: 500;
             color: var(--text-light);
             font-size: 0.9em;
-            margin-bottom: 8px;
+            margin-bottom: 8px; /* Space between label and input */
             text-transform: uppercase;
         }
         
         .price-item input[readonly] {
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(240, 230, 210, 0.3);
-            padding: 8px 0;
-            font-size: 0.8em;
+            border-bottom: 1px solid rgba(240, 230, 210, 0.3); /* Underline */
+            padding: 8px 0; /* 8px space top/bottom, 0px left/right */
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
-            width: 100%;
+            width: 100%; /* Makes input fill the grid column */
         }
 
         .price-value-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            display: flex; /* Puts input and indicator side-by-side */
+            align-items: center; /* Aligns them vertically */
+            gap: 5px; /* Space between input and indicator */
         }
         .price-value-wrapper input[readonly] {
-            flex-grow: 1;
-            min-width: 0;
-        }
-
-        .price-item.static-item label {
-            font-size: 0.85em;
-            color: rgba(240, 230, 210, 0.8);
-            margin-top: 10px;
+            flex-grow: 1; /* Input takes available space */
+            min-width: 0; /* Prevents input from overflowing */
         }
         
         .price-indicator {
             font-weight: 700;
-            font-size: 0.7em;
-            white-space: nowrap;
+            font-size: 0.9em;
+            white-space: nowrap; /* Prevents indicator text from wrapping */
         }
         .up { color: var(--up-green); }
         .down { color: var(--down-red); }
         .neutral { color: #aaa; }
 
-        /* --- 3. RESIZED FOOTER --- */
-        /* This is the floating footer style from SJ-V.html */
+        /* --- 3. FOOTER --- */
         footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background: rgba(0,0,0,0.3);
-  color: #f0f0f0;
-  font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
-  font-size: 13px;
-  padding: 12px 8px 18px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-  z-index: 9999;
-}
-
-
+            position: fixed; /* Sticks to the bottom of the viewport */
+            bottom: 0;       /* Aligns to the bottom edge */
+            left: 0;         /* Aligns to the left edge */
+            width: 100%;     /* Spans the full width */
+            text-align: center;
+            background: rgba(0,0,0,0.3); /* Semi-transparent background */
+            color: #f0f0f0;
+            font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
+            font-size: 13px;
+            padding: 12px 8px 18px; /* Top(12) Left/Right(8) Bottom(18) spacing */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            z-index: 9999; /* Ensures footer is above other content */
+        }
 
         .charges-text {
             font-size: 14px; 
             font-weight: 200;
-            margin: 0 0 15px 0;
+            margin: 0 0 15px 0; /* 15px space below this text */
         }
         
         .address-text {
             font-size: 14px; 
             font-weight: 400;
-            margin: -2px;
-            line-height: 1.0;
+            margin: -2px; /* Adjusts positioning */
+            line-height: 1.0; /* Adjusts line spacing */
         }
         
-        /* --- 4. MODAL STYLING --- */
-        /* This is the modal style from SJ-V.html */
+        /* --- 4. MODAL STYLING (POPUP) --- */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
+            display: none;    /* Hidden by default */
+            position: fixed;  /* Covers the whole screen */
+            z-index: 100;   /* Sits on top of everything (except footer) */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
+            overflow: auto; /* Allows scrolling if modal is too tall */
+            background-color: rgba(0,0,0,0.7); /* Dark overlay */
+            justify-content: center; /* Centers modal-content horizontally */
+            align-items: center;     /* Centers modal-content vertically */
         }
         .modal-content {
             background-color: var(--bg-medium);
             border: 1px solid var(--accent-gold);
-            margin: auto;
-            padding: 30px;
+            margin: auto; /* Used for centering (good fallback) */
+            padding: 30px; /* Inner spacing of the popup box */
             border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
+            width: 90%;       /* Width of the popup (90% of screen) */
+            max-width: 400px; /* Max width it can grow to */
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             animation: slideIn 0.3s ease-out;
             color: var(--text-light);
@@ -266,41 +271,40 @@ main {
         
         .modal-content h3 {
             color: var(--accent-gold);
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Space below modal title */
         }
         .modal-content .input-group {
             display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-            gap: 8px;
+            flex-direction: column; /* Stacks label and input */
+            margin-bottom: 15px; /* Space between each input group */
+            gap: 8px; /* Space between label and input */
         }
         .modal-content .input-group label {
             width: auto;
             text-align: left;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Extra space (gap is also used) */
             font-size: 1em;
         }
         .modal-content .input-group input {
-            width: 100%;
-            padding: 14px;
+            width: 100%;      /* Input field fills the width */
+            padding: 14px;    /* Inner spacing of the input field */
             background-color: rgba(0,0,0,0.2);
             border: 1px solid rgba(240, 230, 210, 0.3);
             border-radius: 8px;
             font-size: 16px;
             color: var(--text-light);
-            /* This fixes a style bug in the modal */
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Includes padding in the 100% width */
             text-align: left;
         }
 
         .modal-buttons {
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
+            justify-content: flex-end; /* Aligns buttons to the right */
+            gap: 10px; /* Space between buttons */
+            margin-top: 20px; /* Space above the buttons */
         }
         .modal-buttons button {
-            padding: 10px 20px;
+            padding: 10px 20px; /* Vertical(10) and Horizontal(20) spacing */
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -318,11 +322,13 @@ main {
             color: var(--text-dark);
         }
         .modal-buttons .update-btn:hover { background-color: #dab654; }
+        
+        /* Fix for footer on some mobile browsers (iOS) */
         @supports (-webkit-touch-callout: none) {
-  footer {
-    position: sticky;
-  }
-}
+            footer {
+                position: sticky;
+            }
+        }
 
     </style>
 </head>
@@ -374,13 +380,11 @@ main {
                     </div>
                 </div>
                 <div class="price-item static-item">
-                    
-                </div>
+                    </div>
             </div>
         </div>
 
         <div id="previous" class="tabcontent">
-            
             <div class="price-grid">
                  <div class="price-item">
                     <label for="previous_kt24">GOLD - 24 KT:</label>
@@ -405,9 +409,7 @@ main {
             </div>
         </div>
         
-    </div>
-
-    <footer>
+    </div> <footer>
         <p class="charges-text">
             Making charges and 3% GST applicable.
         </p>
@@ -435,102 +437,110 @@ main {
     </div>
 
     <script>
-        // ⬇️ *** IMPORTANT *** ⬇️
-        // This is the WORKING URL from your SJ-III.html file
+        // --- IMPORTANT ---
+        // This URL is your Google Apps Script endpoint. Do not change.
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ_MyjGRfnbLzuZf-EjrLg-SOQuRZ0E_pB_jP39bktCznZAQoE6HYpYF7Rf8KoKrRa/exec';
-        // ⬆️ *** IMPORTANT *** ⬆️
 
-
-        // --- Tab Navigation ---
+        // --- Tab Navigation Logic ---
         function openTab(evt, tabName) {
             let i, tabcontent, tablinks;
+            // Hide all tab content
             tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            // Remove "active" class from all tab buttons
             tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            // Show the specific tab content
             document.getElementById(tabName).style.display = "block";
+            // Add "active" class to the button that was clicked
             evt.currentTarget.className += " active";
         }
         
-        // --- Popup Modal ---
-        function openUpdatePopup() { document.getElementById('updateModal').style.display = 'flex'; }
+        // --- Popup Modal Logic ---
+        function openUpdatePopup() {
+            // Shows the modal by changing its display from 'none' to 'flex'
+            document.getElementById('updateModal').style.display = 'flex';
+        }
         function closeUpdatePopup() { 
+            // Hides the modal
             document.getElementById('updateModal').style.display = 'none'; 
+            // Clears the input fields for next time
             document.getElementById('modal_gold_price').value = '';
             document.getElementById('modal_silver_price').value = '';
         }
 
         // --- Price Update Logic ---
 
-        // 1. Triggered by "Update" button in popup
+        // 1. Called when "Update" button in popup is clicked
         async function applyUpdatedPrices() {
             const newGoldPrice = document.getElementById('modal_gold_price').value;
             const newSilverPrice = document.getElementById('modal_silver_price').value;
 
-            // Basic validation
+            // Simple check: if both fields are empty, do nothing
             if (!newGoldPrice && !newSilverPrice) {
                 alert("Please enter at least one new price.");
                 return;
             }
 
-            // Show loading
+            // Disable button and show "Updating..." text
             const updateBtn = document.querySelector('.update-btn');
             updateBtn.textContent = 'Updating...';
             updateBtn.disabled = true;
 
             try {
-                // 2. Send *only* the new raw prices to Google Apps Script
+                // 2. Send the new prices to the Google Apps Script URL
                 await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ 
-                        gold: newGoldPrice || null, // Send null if empty
+                        gold: newGoldPrice || null, // Send new price, or null if empty
                         silver: newSilverPrice || null
                     })
                 });
                 
-                // 3. On success, fetch all new data from the sheet
+                // 3. If POST is successful, re-fetch all prices to update the page
                 await fetchPricesFromSheet();
-                closeUpdatePopup();
+                closeUpdatePopup(); // Close the popup
 
             } catch (error) {
                 console.error("Error saving data to Google Sheet:", error);
                 alert("An error occurred. Please try again.");
             } finally {
-                // Reset button
+                // 4. Whether it worked or failed, re-enable the button
                 updateBtn.textContent = 'Update';
                 updateBtn.disabled = false;
             }
         }
 
-        // 4. Fetches all data from the sheet and populates the HTML
+        // 4. Fetches all data from the sheet (GET request)
         async function fetchPricesFromSheet() {
             try {
                 const response = await fetch(APPS_SCRIPT_URL);
                 if (!response.ok) { throw new Error('Network response was not ok'); }
-                const data = await response.json();
+                const data = await response.json(); // Get JSON data from script
 
-                // Helper to format prices
+                // Helper function to format numbers as "₹ 123.45"
                 const format = (val) => val ? `₹ ${parseFloat(val).toFixed(2)}` : '';
 
-                // Populate Latest Gold
+                // Populate all "Latest" fields
                 document.getElementById('kt24').value = format(data.latest_24);
                 document.getElementById('kt22').value = format(data.latest_22);
                 document.getElementById('kt20').value = format(data.latest_20);
                 document.getElementById('kt18').value = format(data.latest_18);
+                document.getElementById('silver_latest').value = format(data.latest_silver);
                 
-                // Populate Previous Gold
+                // Populate all "Previous" fields
                 document.getElementById('previous_kt24').value = format(data.previous_24);
                 document.getElementById('previous_kt22').value = format(data.previous_22);
                 document.getElementById('previous_kt20').value = format(data.previous_20);
                 document.getElementById('previous_kt18').value = format(data.previous_18);
-                
-                // Populate Silver (Latest and Previous)
-                // These IDs exist in the SJ-V HTML, so this works
-                document.getElementById('silver_latest').value = format(data.latest_silver);
                 document.getElementById('silver_previous').value = format(data.previous_silver);
 
-                // 5. Update the "up/down" indicators
+                // 5. After populating, update the (▲ ▼) indicators
                 updateIndicators();
 
             } catch (error) {
@@ -538,7 +548,7 @@ main {
             }
         }
 
-        // 6. Updates all price change indicators (▲ ▼)
+        // 6. Compares latest and previous prices to show (▲ ▼)
         function updateIndicators() {
             // Gold indicators
             const pairs = [
@@ -549,44 +559,59 @@ main {
             ];
             
             pairs.forEach(p => {
+                // Get values and remove "₹ " to convert to a number
                 const latest = parseFloat(document.getElementById(p.latest).value.replace('₹ ', ''));
                 const previous = parseFloat(document.getElementById(p.previous).value.replace('₹ ', ''));
                 const ind = document.getElementById(p.indicator);
                 
                 if (!isNaN(latest) && !isNaN(previous)) {
                     const diff = latest - previous;
-                    if (diff > 0) { ind.innerHTML = `(+${diff.toFixed(2)} ▲)`; ind.className = 'price-indicator up'; }
-                    else if (diff < 0) { ind.innerHTML = `(${diff.toFixed(2)} ▼)`; ind.className = 'price-indicator down'; }
-                    else { ind.textContent = '(-)'; ind.className = 'price-indicator neutral'; }
-                } else { ind.textContent = ''; }
+                    if (diff > 0) { // Price went up
+                        ind.innerHTML = `(+${diff.toFixed(2)} ▲)`; 
+                        ind.className = 'price-indicator up'; // Make it green
+                    } else if (diff < 0) { // Price went down
+                        ind.innerHTML = `(${diff.toFixed(2)} ▼)`; 
+                        ind.className = 'price-indicator down'; // Make it red
+                    } else { // No change
+                        ind.textContent = '(-)'; 
+                        ind.className = 'price-indicator neutral'; // Make it grey
+                    }
+                } else { 
+                    ind.textContent = ''; // Clear if no data
+                }
             });
 
-            // Silver indicator
+            // Silver indicator (done separately)
             const latestSilver = parseFloat(document.getElementById('silver_latest').value.replace('₹ ', ''));
             const previousSilver = parseFloat(document.getElementById('silver_previous').value.replace('₹ ', ''));
             const silverInd = document.getElementById('silver_indicator');
 
             if (!isNaN(latestSilver) && !isNaN(previousSilver)) {
                 const diff = latestSilver - previousSilver;
-                if (diff > 0) { silverInd.innerHTML = `(+${diff.toFixed(2)} ▲)`; silverInd.className = 'price-indicator up'; }
-                else if (diff < 0) { silverInd.innerHTML = `(${diff.toFixed(2)} ▼)`; silverInd.className = 'price-indicator down'; }
-                else { silverInd.textContent = '(-)'; silverInd.className = 'price-indicator neutral'; }
-            } else { silverInd.textContent = ''; }
+                if (diff > 0) { 
+                    silverInd.innerHTML = `(+${diff.toFixed(2)} ▲)`; 
+                    silverInd.className = 'price-indicator up'; 
+                } else if (diff < 0) { 
+                    silverInd.innerHTML = `(${diff.toFixed(2)} ▼)`; 
+                    silverInd.className = 'price-indicator down'; 
+                } else { 
+                    silverInd.textContent = '(-)'; 
+                    silverInd.className = 'price-indicator neutral'; 
+                }
+            } else { 
+                silverInd.textContent = ''; 
+            }
         }
         
         // --- Page Load ---
+        // Runs when the page first finishes loading
         window.onload = function() {
+            // Clicks the "Latest Prices" tab by default
             document.getElementById("defaultOpen").click();
-            fetchPricesFromSheet(); // Load prices from Google Sheet on page load
+            // Fetches prices from Google Sheet as soon as page loads
+            fetchPricesFromSheet(); 
         };
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
