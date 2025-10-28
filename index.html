@@ -47,7 +47,7 @@
         /* --- 2. PRICE CONTAINER --- */
         .container {
             position: absolute; 
-            top: 60%;
+            top: 62%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 450px;
@@ -72,11 +72,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 5px;
+            gap: 20px;
             transition: background-color 0.3s ease;
             position: fixed; 
             top: 25px;       
-            left: 25px;      
+            left: 175px;      
             z-index: 10;     
             width: 50px;
             height: 50px;
@@ -91,7 +91,7 @@
         .hamburger-button .bar {    
             width: 25px;  
             height: 3px; 
-            background-color: var(--text-light);    
+            background-color: #f0e6d200;    
             border-radius: 2px; 
         }
         
@@ -119,20 +119,23 @@
         }
         
         .price-item label {
-            font-weight: 500;
-            color: var(--text-light);
-            font-size: 0.9em;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
+    font-weight: bold;        /* bold text */
+    color: white;             /* white text */
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-style: italic;       /* italic text */
+    text-decoration: underline; /* underline text */
+}
+
         
         .price-item input[readonly] {
             background: transparent;
             border: none;
             border-bottom: 1px solid rgba(240, 230, 210, 0.3);
             padding: 8px 0;
-            font-size: 1.1em;
-            font-weight: 700;
+            font-size: 0.9em;
+            font-weight: 500;
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
             width: 100%;
@@ -190,8 +193,8 @@
         }
         
         .address-text {
-            font-size: 14px;    
-            font-weight: 400;
+            font-size: 12px;    
+            font-weight: 300;
             margin: -2px;
             line-height: 1.0;
         }
@@ -295,35 +298,35 @@
         <div id="latest">
             <div class="price-grid">
                 <div class="price-item">
-                    <label for="kt24">GOLD - 24 KT:</label>
+                    <label for="kt24">GOLD - 24 KT :</label>
                     <div class="price-value-wrapper">
                         <input type="text" id="kt24" readonly>
                         <span id="indicator_24" class="price-indicator"></span>
                     </div>
                 </div>
                 <div class="price-item">
-                    <label for="kt22">GOLD - 22 KT:</label>
+                    <label for="kt22">GOLD - 22 KT :</label>
                     <div class="price-value-wrapper">
                         <input type="text" id="kt22" readonly>
                         <span id="indicator_22" class="price-indicator"></span>
                     </div>
                 </div>
                 <div class="price-item">
-                    <label for="kt20">GOLD - 20 KT:</label>
+                    <label for="kt20">GOLD - 20 KT :</label>
                     <div class="price-value-wrapper">
                         <input type="text" id="kt20" readonly>
                         <span id="indicator_20" class="price-indicator"></span>
                     </div>
                 </div>
                 <div class="price-item">
-                    <label for="kt18">GOLD - 18 KT:</label>
+                    <label for="kt18">GOLD - 18 KT :</label>
                     <div class="price-value-wrapper">
                         <input type="text" id="kt18" readonly>
                         <span id="indicator_18" class="price-indicator"></span>
                     </div>
                 </div>
                 <div class="price-item">
-                    <label for="silver_latest">SILVER - FINE:</label>
+                    <label for="silver_latest">SILVER - FINE :</label>
                     <div class="price-value-wrapper">
                         <input type="text" id="silver_latest" readonly>
                         <span id="silver_indicator" class="price-indicator"></span>
