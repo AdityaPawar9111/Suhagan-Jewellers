@@ -22,13 +22,16 @@
         }
 
         /* --- 1. FULL SCREEN BACKGROUND --- */
-        body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    overflow-x: hidden; /* allow vertical scroll */
+        html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto; /* allow scrolling */
+  background: linear-gradient(to bottom, #720000, #400000);
 }
+
 
         
         body {
@@ -52,26 +55,17 @@
         /* --- 2. PRICE CONTAINER --- */
         /* This is the floating box style from SJ-V.html */
         .container {
-            position: absolute;
-            width: 90%; /* Takes 90% of screen width */
-            
-            /* Positioned between half-way and the footer */
-            bottom: 120px; 
-            
-            left: 50%;
-            transform: translateX(-50%);
-            
-            background: transparent;
-            overflow: hidden;
-            border: none;
-            
-            /* Added for better appearance on the image */
-            padding: 10px;
-            box-sizing: border-box;
-            background-color: rgba(59, 0, 0, 0.2); /* Faint dark background for readability */
-            backdrop-filter: blur(2px); /* Blurs the image slightly behind the prices */
-            border-radius: 10px;
-        }
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-bottom: 120px; /* space above footer */
+}
+
 
         /* --- STYLES FOR TABS, GRIDS, ETC. FROM SJ-V.html --- */
         .tab {
@@ -202,19 +196,20 @@
         /* --- 3. RESIZED FOOTER --- */
         /* This is the floating footer style from SJ-V.html */
         footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 10px 20px 10px; 
-    color: #f0f0f0;
-    text-align: center;
-    font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
-    z-index: 9999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  color: #f0f0f0;
+  font-family: 'Noto Sans', 'Tiro Devanagari Hindi', sans-serif;
+  font-size: 13px;
+  padding: 12px 8px 18px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  z-index: 9999;
 }
+
 
 
         .charges-text {
@@ -578,6 +573,7 @@
 
 </body>
 </html>
+
 
 
 
